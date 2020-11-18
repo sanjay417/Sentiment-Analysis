@@ -1,0 +1,13 @@
+.i-logo {
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='50px'><text fill='black' x='10' y='31' font-size='20' font-weight='bold'>864</text></svg>");
+  /* background-position: center; */
+}
+
+.bg-primary {
+  background-color: #367dc9;
+}
