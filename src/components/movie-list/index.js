@@ -39,11 +39,11 @@ class MovieList extends Component {
         result.good = []
         result.bad = []
         for (let i = 0; i < result.reviews.length; i++) {
-          if (result.reviews[i].prediction[0] > result.reviews[i].prediction[1]) {
+          if (result.reviews[i].prediction[0] > .85) {
             percent += 1
 
             result.good.push(result.reviews[i].review)
-          } else {
+          } else if (result.reviews[i].prediction[1] > .85) {
             result.bad.push(result.reviews[i].review)
           }
         }
