@@ -43,9 +43,13 @@ class MovieList extends Component {
           if (result.reviews[i].prediction[0] > .85) {
             percent += 1
 
-            result.good.push(result.reviews[i].review)
+            result.good.push(
+              result.reviews[i].review + `[pos: ${result.reviews[i].prediction[0]}, neg: ${result.reviews[i].prediction[1]}]`
+            )
           } else if (result.reviews[i].prediction[1] > .85) {
-            result.bad.push(result.reviews[i].review)
+            result.bad.push(
+              result.reviews[i].review + `[pos: ${result.reviews[i].prediction[0]}, neg: ${result.reviews[i].prediction[1]}]`
+            )
           }
         }
 
