@@ -48,7 +48,7 @@ class MovieList extends Component {
             )
           } else if (result.reviews[i].prediction[1] > 85) {
             result.bad.push(
-              result.reviews[i].review + `\n[[pos: ${result.reviews[i].prediction[0]}, neg: ${result.reviews[i].prediction[1]}]`
+              result.reviews[i].review + `\n[pos: ${result.reviews[i].prediction[0]}, neg: ${result.reviews[i].prediction[1]}]`
             )
           }
         }
