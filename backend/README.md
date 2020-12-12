@@ -1,12 +1,20 @@
-1.) Setup a python virtual environment - pip install virtualenv
-					 virtualenv myenv
-					 myenv\Scripts\activate 
+First please go into the backend folder by running the following comamnd.
+```bash
+$ cd backend
+```
+From the backend folder, please follow the following instructions.
 
-2.) Installing necessary packages - pip install flask
-				    pip install requests
-				    pip install pickle
-				    pip install nltk
-			            pip innstall sklearn
+1.) Setup a python virtual environment -
+          pip install virtualenv
+					virtualenv myenv
+					myenv\Scripts\activate 
+
+2.) Installing necessary packages -
+          pip install flask
+          pip install requests
+          pip install pickle
+          pip install nltk
+          pip install sklearn
 
 3.) Trained classifier is already included. The file with .pickle extension. But, if want to train the whole classifier again, there is 
     dataset included in the folder. Just unzip it and copy the path of pos and neg folders and paste them in the sentimentModel.py at appropriate places.
