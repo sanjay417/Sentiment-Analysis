@@ -25,6 +25,7 @@ class MovieList extends Component {
   invokeSearch = async (input) => {
     this.isLoading(true)
     this.setState({ result: null })
+    this.setState({ searched: false })
 
     try {
       let searchField = input.toLowerCase().split(' ').join('+')
