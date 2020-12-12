@@ -22,30 +22,28 @@ class MovieList extends Component {
 
   invokeSearch = async (input) => {
     try {
-      const searchField = input.toLowerCase.split().join('+')
+      let searchField = input.toLowerCase().split(' ').join('+')
+      console.log(searchField)
 
       await axios.get(`/getreviews?movie=${searchField}`).then(res => {
+        if(!res) throw "ERROR";
+      
         let result = res.data;
         let percent = 0
 
         result.good = []
         result.bad = []
-        
-        for (let i = 0; i < result.reviews.length(); i++) {
-          if (result.reviews[i].prediction > 50) {
+        for (let i = 0; i < result.reviews.length; i++) {
+          if (result.reviews[i].prediction[0] > result.reviews[i].prediction[1]) {
             percent += 1
 
-            if (result.good.length() < 5) {
-              result.good.push(result.reviews[i].review)
-            }
+            result.good.push(result.reviews[i].review)
           } else {
-            if (result.bad.length() < 5) {
-              result.bad.push(result.reviews[i].review)
-            }
+            result.bad.push(result.reviews[i].review)
           }
         }
 
-        result.percent = Math.round(percent / result.reviews.length() * 100)
+        result.percent = Math.round(percent / result.reviews.length * 100)
 
         this.setState({ result })
       })
@@ -101,13 +99,13 @@ class MovieList extends Component {
           (this.state.searched && this.state.result) ?
           (
             <ul className="mt-15" style={{ width: '80%' }} data-testid="movieList">
-              <div className="slide-up-fade-in py-10 px-10" style={{ backgroundColor: 'white', boxShadow: '0px 0px 5px #888888' }}>
+              <div className="slide-up-fade-in py-10 px-10" style={{ backgroundColor: 'white', boxShadow: '0px 0px 5px #888888', textAlign: 'center' }}>
                 IMDB Rating: <hr/>
-                { this.state.result.imdbRating }
+                <b style={{ fontSize: '2em' }}>{ this.state.result.imdbRating }</b>
               </div><br/>
 
               <div className="slide-up-fade-in py-10 px-10" style={{ backgroundColor: 'white', boxShadow: '0px 0px 5px #888888', textAlign: 'center' }}>
-                Rating: <hr/>
+                User Rating: <hr/>
                 <b style={{ fontSize: '2em' }}>{ this.state.result.percent }%</b>
               </div><br/>
 
