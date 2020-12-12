@@ -9,11 +9,13 @@ class MovieList extends Component {
     this.state = {
       searchValue: '',
       result: null,
-      searched: false
+      searched: false,
+      loading: false
     }
 
     this.setSearch = this.setSearch.bind(this)
     this.invokeSearch = this.invokeSearch.bind(this)
+    this.isLoading = this.isLoading.bind(this)
   }
 
   setSearch = (val) => {
@@ -21,6 +23,9 @@ class MovieList extends Component {
   }
 
   invokeSearch = async (input) => {
+    this.isLoading(true)
+    this.setState({ result: null })
+
     try {
       let searchField = input.toLowerCase().split(' ').join('+')
       console.log(searchField)
@@ -50,18 +55,26 @@ class MovieList extends Component {
 
       this.setState({ searched: true })
 
+      this.isLoading(false)
+
       return true
     } catch (err) {
       this.setState({ result: null })
+      this.setState({ searched: true })
+      this.isLoading(false)
       console.error(err)
 
       return false
     }
   }
 
+  isLoading = loading => {
+    this.setState({ loading })
+  }
+
   render() {
     return (
-      <div className="layout-column align-items-center mt-50">
+      <div className="layout-column align-items-center mt-50" style={{ cursor: this.state.loading ? 'wait' : 'auto' }}>
         {
           !this.state.searched &&
           (
@@ -134,8 +147,12 @@ class MovieList extends Component {
           ) : this.state.searched ?
           (<div className="mt-50 slide-up-fade-in" data-testid="no-result">No Results Found</div>) : (<div className="mt-50 slide-up-fade-in" data-testid="no-result"></div>)
         }
+
+        {
+          this.state.loading && (<div className="mt-50 slide-up-fade-in" data-testid="no-result">Loading...</div>)
+        }
       </div>
-    );
+    )
   }
 }
 
